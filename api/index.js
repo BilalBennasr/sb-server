@@ -7,19 +7,10 @@ const { Configuration, OpenAIApi } = require("openai");
 const app = express();
 app.use(bodyParser.json());
 
-
-const express = require('express');
-const serverless = require('serverless-http');
-
-const app = express();
-
 app.get('/test', (req, res) => {
-  res.send("Endpoint test OK");
-});
-
-module.exports = serverless(app);
-
-
+    res.send("Endpoint test OK");
+  });
+  
 // Exemple de route pour le chat
 app.post('/chat', async (req, res) => {
   try {
