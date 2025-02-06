@@ -1,38 +1,15 @@
-// api/index.js
 const express = require('express');
 const serverless = require('serverless-http');
-const bodyParser = require('body-parser');
-const { Configuration, OpenAIApi } = require("openai");
-
 const app = express();
-app.use(bodyParser.json());
 
+// Exemple d'endpoint GET simple pour tester
 app.get('/test', (req, res) => {
-    res.send("Endpoint test OK");
-  });
-  
-// Exemple de route pour le chat
-app.post('/chat', async (req, res) => {
-  try {
-    const userMessage = req.body.message;
-    
-    const configuration = new Configuration({
-      apiKey: process.env.OPENAI_API_KEY, // définit ta clé via les variables d'environnement sur Vercel
-    });
-    const openai = new OpenAIApi(configuration);
-
-    const completion = await openai.createCompletion({
-      model: "gpt-4o-mini",
-      prompt: userMessage,
-      max_tokens: 150,
-    });
-    
-    res.json({ response: completion.data.choices[0].text.trim() });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Erreur lors de la génération de la réponse' });
-  }
+  res.send("Endpoint test OK");
 });
 
-// Export de l'application en fonction serverless
+// Exemple d'endpoint POST pour /chat
+app.post('/chat', (req, res) => {
+  res.json({ response: "Réponse test" });
+});
+
 module.exports = serverless(app);
